@@ -1,6 +1,7 @@
+import { useState } from "react";
+
 function NewCar(props) {
     const setIsShow = props.setIsShow
-    const [cars, setCars] = useState([]);
     const [curPlate, setCurPlate] = useState(" ");
     const [curBrand, setCurBrand] = useState(" ");
     const [curModel, setCurModel] = useState(" ");
@@ -16,7 +17,7 @@ function NewCar(props) {
           note: curNote
         }
     
-        setCars([...cars, newCar]);
+        
         console.log(`plate=${curPlate} brand=${curBrand} Model=${curModel} color=${curColor} note=${curNote}`);
     
         setCurPlate("");

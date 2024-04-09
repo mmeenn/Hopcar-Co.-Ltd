@@ -5,6 +5,17 @@
   text-align: center;
 }
 
-/* .newcar-container {
+.webcontainer{
+  width: 1280px;
   display: flex;
-} */
+}
+.add-container{
+  width: 30%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.list-container{
+  width: 70%;
+}

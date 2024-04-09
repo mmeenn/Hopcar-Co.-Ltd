@@ -1,0 +1,12 @@
+.CarItem{
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    border: 2px solid #282c34;
+    margin: 1% 1%;
+    border-radius: 50px;
+    font-size: 25px;
+    background: #fbfbfb;
+    height: 65.2px;
+    width: 90%;
+}
