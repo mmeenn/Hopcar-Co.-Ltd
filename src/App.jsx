@@ -2,7 +2,7 @@ import "./App.css";
 import { useState } from "react";
 import NewCar from "./components/NewCar/NewCar";
 import CarList from "./components/CarList/CarList";
-// let lastId = 5;
+let lastId = 5;
 const INITIAL_CARLIST = [
   {
     id: 1,
@@ -10,7 +10,7 @@ const INITIAL_CARLIST = [
     brand: "BMW",
     model: "520d M Sport Pro",
     color: "Grey metallic",
-    note: "Classy"
+    note: "Classy",
   },
   {
     id: 2,
@@ -18,7 +18,7 @@ const INITIAL_CARLIST = [
     brand: "mercedes-benz",
     model: "E-class saloon",
     color: "Black",
-    note: "Classy"
+    note: "Classy",
   },
   {
     id: 3,
@@ -26,7 +26,7 @@ const INITIAL_CARLIST = [
     brand: "Honda",
     model: "City Hatchback RS",
     color: "Blue metallic",
-    note: "Most Favourite"
+    note: "Most Favourite",
   },
   {
     id: 4,
@@ -34,7 +34,7 @@ const INITIAL_CARLIST = [
     brand: "Toyota",
     model: "Yaris Ative",
     color: "Red",
-    note: " "
+    note: " ",
   },
   {
     id: 5,
@@ -42,25 +42,39 @@ const INITIAL_CARLIST = [
     brand: "Honda",
     model: "Jazz",
     color: "Yellow",
-    note: " "
-  }
-]
+    note: " ",
+  },
+];
 
 function App() {
   const [isShow, setIsShow] = useState(false);
   const [carList, setCarList] = useState(INITIAL_CARLIST);
-  // const addNewCarHandler = (newCarData) => {
-  //   const newCar = {
-  //     ...newCarData,
-  //     id: ++lastId
-  //   }
-  // }
+  const addNewCarHandler = (newCarData) => {
+    const newCar = {
+      ...newCarData,
+      id: ++lastId,
+    };
+    setCarList([newCar, ...carList]);
+  };
+
+  const deleteHandler = (id) => {
+    const newCarList = carList.filter((e) => e.id !== id);
+    setCarList(newCarList);
+  };
+
+  const editHandler = (id, car) => {
+    const newCarList = [...carList];
+    const idx = carList.findIndex((e) => e.id === id);
+    newCarList[idx] = { ...car };
+    setCarList(newCarList);
+  };
+
   return (
     <div className="webcontainer">
       <div className="add-container">
         {isShow ? (
           <div>
-            <NewCar setIsShow ={setIsShow} />
+            <NewCar setIsShow={setIsShow} onAddCar={addNewCarHandler} />
           </div>
         ) : (
           <div>
@@ -74,7 +88,13 @@ function App() {
           </div>
         )}
       </div>
-      <div className="list-container"><CarList carList={carList} /></div>
+      <div className="list-container">
+        <CarList
+          carList={carList}
+          deleteHandler={deleteHandler}
+          editHandler={editHandler}
+        />
+      </div>
     </div>
   );
 }
