@@ -1,0 +1,14 @@
+.webcontainer {
+  width: 1280px;
+  display: flex;
+}
+.add-container {
+  width: 1280px;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid black;
+}
+/* 
+.list-container {
+  width: 70%;
+} */

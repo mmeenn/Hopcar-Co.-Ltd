@@ -1,6 +1,11 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import "./CarItem.css";
-function CarItem(props) {
+import { HandlerContext } from "../../context/handler-context";
+import "bootstrap/dist/css/bootstrap.min.css";
+import { Button } from "react-bootstrap";
+
+export default function CarItem(props) {
+  const ctx = useContext(HandlerContext);
   const [isEdit, setIsEdit] = useState(false);
   const [curPlate, setCurPlate] = useState(" ");
   const [curBrand, setCurBrand] = useState(" ");
@@ -24,13 +29,13 @@ function CarItem(props) {
       color: curColor,
       note: curNote,
     };
-    props.editHandler(props.id, editValue);
+    ctx.editHandler(props.id, editValue);
     setIsEdit(false);
   };
 
   if (isEdit) {
     return (
-      <div className="CarItem">
+      <div className="border border-dark rounded my-3 mx-3 d-flex">
         <input
           placeholder="Plate"
           type="text"
@@ -71,32 +76,47 @@ function CarItem(props) {
             setCurNote(e.target.value);
           }}
         />
-        <button onClick={onClickDone}>Done</button>
-        <button onClick={() => setIsEdit(false)}>Cancel</button>
+        <Button variant="success" onClick={onClickDone}>
+          Done
+        </Button>
+        <Button variant="danger" onClick={() => setIsEdit(false)}>
+          Cancel
+        </Button>
       </div>
     );
   }
 
   return (
-    <div className="CarItem">
-      <div>{props.plate}</div>
-      <div>{props.brand}</div>
-      <div>{props.model}</div>
-      <div>{props.color}</div>
-      <div>{props.note}</div>
-      <div>
-        <button onClick={onClickEdit}>Edit</button>
+    <div className="border border-dark rounded my-3 mx-3 d-flex">
+      <div className="car-data">
+        <div className="row py-2">
+          <div className="col fw-bold text-primary fs-4">{props.plate}</div>
+          <div className="col fs-5 text">{props.brand}</div>
+          <div className="col fs-5 text">{props.model}</div>
+          <div className="col fs-5 text">{props.color}</div>
+        </div>
+        <div className="row py-2">
+          <div className="col fs-7 text-secondary">{props.note}</div>
+        </div>
       </div>
-      <div>
-        <button
-          onClick={() => {
-            props.deleteHandler(props.id);
-          }}
-        >
-          Delete
-        </button>
+
+      <div className="button-container py-3">
+        <div className="edit-btn py-1">
+          <Button variant="warning" onClick={onClickEdit}>
+            Edit
+          </Button>
+        </div>
+        <div className="delete-btn py-1">
+          <Button
+            variant="danger"
+            onClick={() => {
+              ctx.deleteHandler(props.id);
+            }}
+          >
+            Delete
+          </Button>
+        </div>
       </div>
     </div>
   );
 }
-export default CarItem;

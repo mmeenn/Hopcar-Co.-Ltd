@@ -4,9 +4,17 @@
     align-items: center;
     border: 2px solid #282c34;
     margin: 1% 1%;
-    border-radius: 50px;
-    font-size: 25px;
+    border-radius: 5px;
     background: #fbfbfb;
-    height: 65.2px;
+    height: 110px;
     width: 90%;
+}
+
+.car-data{
+    font-size: 15px;
+    width: 80%;
+}
+
+.button-container {
+    width: 20%;
 }
